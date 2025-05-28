@@ -1,5 +1,5 @@
 #!/bin/sh
-set -xe    # Увімкнути трасування (вивід кожної команди) та exit on error
+set -xe
 
 echo "Waiting for MySQL server socket to be available…"
 until nc -z db 3306; do
@@ -19,5 +19,5 @@ mysqladmin ping -h db -u app_user -p1234 --silent
 echo "MySQL ready — running migrations"
 python manage.py migrate --noinput
 
-echo "Starting Django"
+echo "Starting Django server"
 exec python manage.py runserver 0.0.0.0:8080
